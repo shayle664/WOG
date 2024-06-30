@@ -11,19 +11,36 @@ def score_server():
         if os.path.exists(utils.SCORES_FILE_NAME):
             with open(utils.SCORES_FILE_NAME, 'r') as file:
                 SCORE = int(file.readline())
+                return f"""<html>
+                                <head>
+                                    <title>Score game</title>
+                                </head>
+                                <body>
+                                    <h1>The score is:</h1>
+                                    <div id="score">{SCORE}</div>
+                                </body>
+                                </html>"""
         else:
-            SCORE = 0
+            return f"""<html>
+                            <head>
+                                <title>Score game</title>
+                            </head>
+                            <body>
+                                <h1>ERROR</h1>
+                                <div id="score" style="color:red">{utils.BAD_RETURN_CODE}</div>
+                            </body>
+                            </html>"""
     except (FileNotFoundError, ValueError):
-        SCORE = 0
-    return f"""<html>
-                <head>
-                    <title>Score game</title>
-                </head>
-                <body>
-                    <h1>The score is:</h1>
-                    <div id="score">{SCORE}</div>
-                </body>
-                </html>"""
+        return f"""<html>
+                                    <head>
+                                        <title>Score game</title>
+                                    </head>
+                                    <body>
+                                        <h1>ERROR</h1>
+                                        <div id="score" style="color:red">{utils.BAD_RETURN_CODE}</div>
+                                    </body>
+                                    </html>"""
+
 
 
 if __name__ == "__main__":

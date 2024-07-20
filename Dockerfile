@@ -1,5 +1,5 @@
 FROM python:alpine
-WORKDIR /app/WOG
+WORKDIR /app
 RUN apk add --no-cache git chromium chromium-chromedriver
 RUN git clone https://github.com/shayle664/WOG.git .
 COPY requirements.txt .

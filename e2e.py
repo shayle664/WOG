@@ -1,4 +1,3 @@
-import main_score
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -23,4 +22,3 @@ def test_scores_service():
 if __name__ == "__main__":
     exit_code = main_function()
     exit(exit_code)
-

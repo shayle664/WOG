@@ -1,14 +1,13 @@
 version: '3.8'
 
+
 services:
   flask-app:
-    image: shayle/shay-wog:1.08
+    image: main_core:01
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "8777:5000"
     volumes:
-      - ./scores.txt:/app/scores.txt
-    environment:
-      - FLASK_ENV=development
+       - "./scores.txt:/scores.txt"

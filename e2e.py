@@ -12,7 +12,7 @@ def main_function():
 
 def test_scores_service():
     driver = webdriver.Chrome()
-    driver.get("http://127.0.0.1:5000")
+    driver.get("http://10.0.0.8:5000")
     score = driver.find_element(By.ID, "score").text
     if 0 < int(score) < 1000:
         return True

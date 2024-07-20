@@ -20,14 +20,14 @@ def score_server():
     try:
         if os.path.exists(utils.SCORES_FILE_NAME):
             with open(utils.SCORES_FILE_NAME, 'r') as file:
-                SCORE = int(file.readline())
+                score = int(file.readline())
                 return f"""<html>
                                 <head>
                                     <title>Score game</title>
                                 </head>
                                 <body>
                                     <h1>The score is:</h1>
-                                    <div id="score">{SCORE}</div>
+                                    <div id="score">{score}</div>
                                 </body>
                                 </html>"""
         else:

@@ -6,4 +6,4 @@ WORKDIR /app/WOG
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 EXPOSE 5000
-CMD python main_score.py
+CMD python main_score.py && python e2e.py

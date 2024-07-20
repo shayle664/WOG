@@ -13,6 +13,8 @@ bad_return = f"""<html>
                                         <div id="score" style="color:red">{utils.BAD_RETURN_CODE}</div>
                                     </body>
                                     </html>"""
+
+
 @app.route("/")
 def score_server():
     try:
@@ -34,6 +36,6 @@ def score_server():
         return bad_return
 
 
-
 if __name__ == "__main__":
     app.run(debug=True)
+    

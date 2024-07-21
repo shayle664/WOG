@@ -3,6 +3,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'shayle/shay-wog'
         IMAGE_TAG = 'latest'
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credential'
     }
     stages {
         stage('Clean UP') {
@@ -28,6 +29,30 @@ pipeline {
             steps {
                 dir('WOG') {
                     bat "python e2e.py"
+                }
+            }
+        }
+        stage('Finalize') {
+            steps {
+                dir('WOG') {
+                    bat "docker-compose down"
+                }
+            }
+        }
+        stage('Docker Login') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
+                    }
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    bat "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_TAG}"
+                    bat "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }

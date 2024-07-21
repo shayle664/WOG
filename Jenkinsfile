@@ -1,44 +1,38 @@
 pipeline {
     agent any
-
     environment {
-        DOCKER_CREDENTIALS_ID = 'dockerhub-creds' 
+        IMAGE_NAME = 'shayle/shay-wog'
+        IMAGE_TAG = 'latest'
     }
-
     stages {
-        stage('Checkout') {
+        stage('Clean UP') {
             steps {
-                git url: 'https://github.com/shayle664/WOG', branch: 'master'
+                deleteDir()
             }
         }
-
-        stage('Build and Run') {
+        stage('Clone Repo') {
             steps {
-                script {
-                    bat 'docker-compose up --build -d'
-                }
+                bat "git clone https://github.com/shayle664/WOG.git"
             }
         }
-
-        stage('Test') {
+        stage('Docker') {
             steps {
                 script {
-                    bat 'python e2e.py'
-                }
-            }
-        }
-
-        stage('Finalize') {
-            steps {
-                script {
-                    bat 'docker-compose down'
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
-                        docker.image('shayle/shay-wog').push('latest')
+                    dir('WOG') {
+                        bat "docker-compose up --build -d"
                     }
+                }
+            }
+        }
+        stage('E2E') {
+            steps {
+                dir('WOG') {
+                    bat "python e2e.py"
                 }
             }
         }
     }
 }
+
 
 

@@ -1,24 +1,32 @@
+import sys
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import ChromiumOptions
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+
+
+def test_scores_service():
+    chrome_options = ChromiumOptions()
+
+    service = Service(ChromeDriverManager().install(), options=chrome_options)
+    driver_chrome = webdriver.Chrome(service=service)
+
+    driver_chrome.get("http://127.0.0.1:8777/")
+    score = driver_chrome.find_element(By.ID, "score")
+    if 0 <= int(score.text) <= 1000:
+        driver_chrome.quit()
+        return True
+    else:
+        driver_chrome.quit()
+        return False
 
 
 def main_function():
     if test_scores_service():
-        return 0
+        sys.exit(0)
     else:
-        return -1
+        sys.exit(-1)
 
 
-def test_scores_service():
-    driver = webdriver.Chrome()
-    driver.get("http://10.0.0.8:5000")
-    score = driver.find_element(By.ID, "score").text
-    if 0 < int(score) < 1000:
-        return True
-    else:
-        return False
-
-
-if __name__ == "__main__":
-    exit_code = main_function()
-    exit(exit_code)
+main_function()

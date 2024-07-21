@@ -1,6 +1,6 @@
 FROM python:alpine
 WORKDIR /app/WOG
-RUN apk add --no-cache git chromium chromium-chromedriver
+RUN apk add --no-cache git
 RUN git clone https://github.com/shayle664/WOG.git .
 COPY requirements.txt .
 RUN pip install -r requirements.txt

@@ -1,5 +1,4 @@
 FROM python:alpine
-WORKDIR /app/WOG
 RUN apk add --no-cache git
 RUN git clone https://github.com/shayle664/WOG.git .
 COPY requirements.txt .

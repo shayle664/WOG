@@ -1,6 +1,6 @@
 import os
 
-SCORES_FILE_NAME = "scores.txt"
+SCORES_FILE_NAME = "app/scores.txt"
 BAD_RETURN_CODE = 401
 
 

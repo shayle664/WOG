@@ -10,4 +10,4 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - "./app/scores.txt:/app/app/scores.txt"
+      - "./app/scores.txt:/app/scores.txt"

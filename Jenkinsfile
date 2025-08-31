@@ -13,14 +13,15 @@ pipeline {
         }
         stage('Clone Repo') {
             steps {
-                bat "git clone https://github.com/shayle664/WOG.git"
+                sh "git clone https://github.com/shayle664/WOG.git"
             }
         }
-        stage('Docker') {
+        stage('Docker Build') {
             steps {
                 script {
                     dir('WOG') {
-                        bat "docker-compose up --build -d"
+                        sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                        sh "docker-compose up --build -d"
                     }
                 }
             }
@@ -28,14 +29,14 @@ pipeline {
         stage('E2E') {
             steps {
                 dir('WOG') {
-                    bat "python e2e.py"
+                    sh "python3 e2e.py"
                 }
             }
         }
         stage('Finalize') {
             steps {
                 dir('WOG') {
-                    bat "docker-compose down"
+                    sh "docker-compose down"
                 }
             }
         }
@@ -43,7 +44,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        bat "docker login -u %DOCKER_USER% -p %DOCKER_PASS%"
+                        sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
                     }
                 }
             }
@@ -51,8 +52,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    bat "docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:${IMAGE_TAG}"
-                    bat "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }

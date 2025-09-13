@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     dir('WOG') {
-                        sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                        sh "cd WOG"
                         sh "docker-compose up --build -d"
                     }
                 }

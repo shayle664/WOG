@@ -24,11 +24,11 @@ app/
 
 ### 🎲 Games Included
 1. **Memory Game**:
-- Shows a random sequence of numbers for a short time.
-- The player must re-enter the sequence correctly.
+  - Shows a random sequence of numbers for a short time.
+  - The player must re-enter the sequence correctly.
 2. **Guess Game**:
-- Computer picks a number between 0 and difficulty.
-- Player must guess the number.
+  - Computer picks a number between 0 and difficulty.
+  - Player must guess the number.
 3. **Currency Roulette**:
-- Computer picks a random USD value.
-- Player must guess its value in ILS within a margin (depending on difficulty).
+  - Computer picks a random USD value.
+  - Player must guess its value in ILS within a margin (depending on difficulty).

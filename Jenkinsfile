@@ -43,7 +43,7 @@ pipeline {
         stage('Finalize') {
             steps {
                 dir('WOG') {
-                    sh "docker-compose down"
+                    sh "docker compose down"
                 }
             }
         }

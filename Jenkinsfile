@@ -59,7 +59,10 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh """
+                        docker tag main_score:01 ${IMAGE_NAME}:${IMAGE_TAG}
+                        docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                    """
                 }
             }
         }

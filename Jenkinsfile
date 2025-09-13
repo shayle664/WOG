@@ -20,7 +20,6 @@ pipeline {
             steps {
                 script {
                     dir('WOG') {
-                        sh "cd WOG"
                         sh "docker-compose up --build -d"
                     }
                 }

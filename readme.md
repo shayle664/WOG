@@ -1,10 +1,10 @@
-#🎮 World of Games (WOG)
+# 🎮 World of Games (WOG)
 
 This project is a Python-based mini-games platform.
 It currently includes several small games that can be played via the command line (CLI) and a basic Flask web app that displays scores.
 
-##📂 Project Structure
-"""
+### 📂 Project Structure
+```
 app/
 │
 ├── games/                     # Individual game implementations
@@ -20,3 +20,15 @@ app/
 ├── utils.py                   # Utility functions
 ├── requirements.txt           # Python dependencies
 └── e2e.py                     # End-to-End test (verifies web app is running)
+```
+
+### 🎲 Games Included
+1. **Memory Game**:
+- Shows a random sequence of numbers for a short time.
+- The player must re-enter the sequence correctly.
+2. **Guess Game**:
+- Computer picks a number between 0 and difficulty.
+- Player must guess the number.
+3. **Currency Roulette**:
+- Computer picks a random USD value.
+- Player must guess its value in ILS within a margin (depending on difficulty).

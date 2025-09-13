@@ -26,10 +26,18 @@ pipeline {
                 }
             }
         }
-        stage('E2E') {
+        stage('Test app/E2E') {
             steps {
                 dir('WOG') {
-                    sh "python3 e2e.py"
+                    sh '''
+                        sleep 5
+                        if curl -s http://localhost:5000 | grep -q "The score is:"; then
+                          echo "✅ App is up and contains expected text"
+                        else
+                          echo "❌ App test failed"
+                          exit 1
+                        fi
+                    '''
                 }
             }
         }

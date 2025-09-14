@@ -22,6 +22,7 @@ app/
 └── e2e.py                     # End-to-End test (verifies web app is running)
 ```
 
+
 ## 🎲 Games Included
 1. **Memory Game**:
   - Shows a random sequence of numbers for a short time.
@@ -33,6 +34,7 @@ app/
   - Computer picks a random USD value.
   - Player must guess its value in ILS within a margin (depending on difficulty).
 
+
 ## 🏆 Score System
 - All games award points based on difficulty level.
 
@@ -40,10 +42,12 @@ app/
 
 - The Flask app (main_score.py) reads this file and displays: The score is:
 
+
 ## Testing 
 - curl to verify that the Flask app is up and that the score is displayed correctly.
 
 - This is integrated into Jenkins as part of the E2E test stage.
+
 
 ## 🚀 Pipeline (CI/CD)
 

@@ -22,7 +22,7 @@ app/
 └── e2e.py                     # End-to-End test (verifies web app is running)
 ```
 
-### 🎲 Games Included
+## 🎲 Games Included
 1. **Memory Game**:
   - Shows a random sequence of numbers for a short time.
   - The player must re-enter the sequence correctly.
@@ -32,3 +32,31 @@ app/
 3. **Currency Roulette**:
   - Computer picks a random USD value.
   - Player must guess its value in ILS within a margin (depending on difficulty).
+
+## 🏆 Score System
+- All games award points based on difficulty level.
+
+- Scores are saved into scores.txt.
+
+- The Flask app (main_score.py) reads this file and displays: The score is:
+
+## Testing 
+- curl to verify that the Flask app is up and that the score is displayed correctly.
+
+- This is integrated into Jenkins as part of the E2E test stage.
+
+## 🚀 Pipeline (CI/CD)
+
+The project is built and tested in a Jenkins pipeline with the following steps:
+
+1. Clean up → remove old workspace.
+
+2. Clone Repo → pull source code.
+
+3. Docker Build & Run → build image and run with docker-compose.
+
+4. E2E Test → check if the app is running and returning the expected output.
+
+5. Finalize → bring down containers.
+
+6. Docker Login & Push → push the built image to Docker Hub.
